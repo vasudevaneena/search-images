@@ -1,0 +1,26 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import '../../styles/config.scss';
+
+body {
+  margin: 20px;
+  font-family: $font;
+  background-color: $color-label;//#eef1f3;
+  .button-style {
+    border-radius: 3px;
+    margin-left: $size;
+    margin-top: $size;
+    background-color: $color-heading;//#5a5f73;
+    color:$color-white;
+  }
+  input{
+    margin-left:13px;
+  }
+  .flowers {
+    margin-top: $size;
+    img {
+      margin-top: $size;
+      width: 200px;
+      height: 150px;
+    }
+  }
+}
