@@ -1,31 +1,26 @@
 import React, { useEffect, useState } from "react";
 import "./SearchImage.scss";
-import unsplash from "../../service/unsplash";
+import { searchImageApi } from "../../service/unsplash";
 
 const SearchImage = () => {
   const [loading, setLoading] = useState(false);
   const [photosList, setPhotosList] = useState([]);
- 
+
   const updateSearchText = (event) => {
     let searchText = event.target.value;
     if (searchText) {
-      apiCall(
-        `https://api.unsplash.com/search/photos?query=${searchText}&client_id=`,
-        "search"
-      );
+      apiCall(searchText);
     } else {
-      apiCall("https://api.unsplash.com/photos?client_id=");
+      apiCall();
     }
   };
 
-  const apiCall = (url, search) => {
-    let response;
+  const apiCall = (search) => {
+   // let response;
     new Promise((resolve) => {
-      unsplash
-        .searchImageApi(url, search)
-        .then((resp) => {        
-          response = resp;
-          setPhotosList(response);
+      searchImageApi(search)
+        .then((resp) => {
+          setPhotosList(resp);
           setLoading(false);
         })
         .catch((err) => {
@@ -34,11 +29,8 @@ const SearchImage = () => {
     });
   };
   useEffect(() => {
-    apiCall("https://api.unsplash.com/photos?client_id=");
-    
+    apiCall();
   }, []);
-
- 
 
   return (
     <>
@@ -50,7 +42,7 @@ const SearchImage = () => {
         onChange={updateSearchText}
         placeholder="search photos"
       />
-    
+
       <div className="flowers">
         {loading ? (
           <div>loading...</div>
