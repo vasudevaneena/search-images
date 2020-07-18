@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const searchImageApi = async (searchImage) => {
   let response;
+ 
   if (searchImage) {
     response = await axios.get("https://api.unsplash.com/search/photos", {
       params: {
@@ -9,6 +10,7 @@ export const searchImageApi = async (searchImage) => {
         query: searchImage,
       },
     });
+  
     return response.data.results;
   } else {
     response = await axios.get("https://api.unsplash.com/photos", {
@@ -20,9 +22,4 @@ export const searchImageApi = async (searchImage) => {
     return response.data;
   }
 
-  // if (searchImage) {
-  //   return response.data.results;
-  // } else {
-  //   return response.data;
-  // }
 };
